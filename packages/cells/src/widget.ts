@@ -1068,10 +1068,8 @@ export namespace CodeCell {
             default:
               return true;
           }
-          const value = msg.header.date;
-          if (!value) {
-            return true;
-          }
+          // If the data is missing, estimate it to now
+          const value = msg.header.date ||  (new Date).toISOString();
           const timingInfo: any = Object.assign(
             {},
             model.metadata.get('execution')
